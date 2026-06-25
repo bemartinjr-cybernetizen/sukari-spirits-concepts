@@ -476,6 +476,74 @@
 </head>
 <body>
 
+<!-- ===================== THEME B INTRO · RISE FROM EMBERS ===================== -->
+<div id="sukari-intro" aria-hidden="true">
+  <div class="intro-stage">
+    <div class="intro-flare"></div>
+    <svg class="intro-phoenix" viewBox="0 0 200 215" aria-hidden="true">
+      <defs><linearGradient id="ph-b" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stop-color="#C2922F"/><stop offset=".5" stop-color="#E0735A"/><stop offset="1" stop-color="#F4D38E"/>
+      </linearGradient></defs>
+      <g fill="none" stroke="url(#ph-b)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path class="p pt-l" pathLength="100" d="M100,158 C92,174 86,186 79,199"/>
+        <path class="p pt-m" pathLength="100" d="M100,158 C100,176 100,188 100,201"/>
+        <path class="p pt-r" pathLength="100" d="M100,158 C108,174 114,186 121,199"/>
+        <path class="p pb"   pathLength="100" d="M100,160 C97,132 99,116 100,100 L100,74 C100,67 104,63 110,61"/>
+        <path class="p pc"   pathLength="100" d="M110,61 C115,55 118,50 121,44"/>
+        <path class="p pw-r" pathLength="100" d="M100,94 C131,80 159,76 184,52 C171,82 150,103 117,111"/>
+        <path class="p pw-l" pathLength="100" d="M100,94 C69,80 41,76 16,52 C29,82 50,103 83,111"/>
+      </g>
+    </svg>
+    <div class="intro-lockup">
+      <div class="intro-logo" role="img" aria-label="Sukari Spirits"></div>
+      <div class="intro-wm">Sukari<span>Spirits</span></div>
+    </div>
+    <span class="ember e1"></span><span class="ember e2"></span><span class="ember e3"></span><span class="ember e4"></span>
+    <span class="ember e5"></span><span class="ember e6"></span><span class="ember e7"></span><span class="ember e8"></span>
+  </div>
+</div>
+<style>
+  #sukari-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
+    background:radial-gradient(900px 720px at 50% 60%,#9A3B22 0%,#7A2F1E 50%,#511D11 100%);
+    animation:si-out .85s cubic-bezier(.6,0,.3,1) 2.95s forwards}
+  #sukari-intro .intro-stage{position:relative;width:min(340px,76vw);height:360px;display:grid;place-items:center}
+  #sukari-intro .intro-phoenix{position:absolute;top:8px;width:154px;height:auto;
+    filter:drop-shadow(0 0 18px rgba(224,115,90,.6));
+    animation:ph-rise 1.35s cubic-bezier(.2,.7,.2,1) both, ph-out .55s ease 1.9s forwards}
+  #sukari-intro .p{stroke-dasharray:100;stroke-dashoffset:100;animation:ph-draw .8s ease forwards}
+  #sukari-intro .pt-l{animation-delay:.25s}#sukari-intro .pt-m{animation-delay:.31s}#sukari-intro .pt-r{animation-delay:.37s}
+  #sukari-intro .pb{animation-delay:.55s}#sukari-intro .pc{animation-delay:.78s}
+  #sukari-intro .pw-r{animation-delay:.9s}#sukari-intro .pw-l{animation-delay:1.0s}
+  #sukari-intro .intro-lockup{opacity:0;transform:scale(.92) translateY(8px);display:flex;flex-direction:column;align-items:center;gap:8px;
+    animation:logo-in 1s cubic-bezier(.2,.7,.2,1) 1.8s forwards}
+  #sukari-intro .intro-logo{width:62px;height:200px;background:url(images/logo-gold-hires.png) center/contain no-repeat;
+    filter:drop-shadow(0 0 22px rgba(244,211,142,.6))}
+  #sukari-intro .intro-wm{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;color:#F4E2C4;font-size:2rem;line-height:1;letter-spacing:-.012em;
+    text-shadow:0 0 24px rgba(232,180,104,.45)}
+  #sukari-intro .intro-wm span{display:block;font-weight:600;font-size:.58rem;letter-spacing:.42em;text-transform:uppercase;color:#E8B468;margin-top:10px}
+  #sukari-intro .intro-flare{position:absolute;top:40px;width:290px;height:290px;border-radius:50%;opacity:0;pointer-events:none;
+    background:radial-gradient(circle,rgba(244,211,142,.9) 0%,rgba(224,115,90,.5) 32%,transparent 66%);
+    animation:flare .9s ease 1.5s forwards}
+  #sukari-intro .ember{position:absolute;bottom:30%;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#F8D98E,#E0735A);opacity:0;animation:ember 2s ease forwards}
+  #sukari-intro .e1{--x:-70px;animation-delay:.4s}
+  #sukari-intro .e2{--x:50px;width:3px;height:3px;animation-delay:.7s}
+  #sukari-intro .e3{--x:-30px;animation-delay:.95s}
+  #sukari-intro .e4{--x:80px;width:3px;height:3px;animation-delay:.55s}
+  #sukari-intro .e5{--x:16px;animation-delay:1.15s}
+  #sukari-intro .e6{--x:-52px;width:3px;height:3px;animation-delay:1.0s}
+  #sukari-intro .e7{--x:36px;animation-delay:.82s}
+  #sukari-intro .e8{--x:-14px;width:3px;height:3px;animation-delay:1.25s}
+  @keyframes ph-draw{to{stroke-dashoffset:0}}
+  @keyframes ph-rise{0%{transform:translateY(36px) scale(.93);opacity:0}45%{opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
+  @keyframes ph-out{to{opacity:0;transform:scale(1.07)}}
+  @keyframes flare{0%{opacity:0;transform:scale(.4)}40%{opacity:1}100%{opacity:0;transform:scale(1.32)}}
+  @keyframes logo-in{0%{opacity:0;transform:scale(.92) translateY(8px)}55%{opacity:1}100%{opacity:1;transform:scale(1) translateY(0)}}
+  @keyframes ember{0%{opacity:0;transform:translateY(0) scale(1)}20%{opacity:.95}100%{opacity:0;transform:translate(var(--x),-175px) scale(.3)}}
+  @keyframes si-out{to{opacity:0;visibility:hidden;transform:scale(1.07)}}
+  @media(prefers-reduced-motion:reduce){#sukari-intro *{animation-duration:.01s!important}#sukari-intro .intro-lockup{opacity:1;transform:none}}
+</style>
+<script>(function(){var ov=document.getElementById('sukari-intro');if(!ov)return;var k=function(){ov.style.display='none'};setTimeout(k,3850);ov.addEventListener('click',k);window.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key===' ')k()},{once:true})})();</script>
+
 <!-- NAV -->
 <header class="nav">
   <div class="wrap nav-inner">
@@ -514,9 +582,6 @@
       </div>
 
       <div class="hero-stage reveal">
-        <div class="hero-panel" aria-hidden="true">
-          <img src="images/hero-bar.png" alt=""/>
-        </div>
         <img class="hero-bottle" src="images/bottle-clean.png" alt="The Sukari ultra-premium vodka bottle with garnet liquid, gold phoenix wordmark and gold cap"/>
       </div>
     </div>

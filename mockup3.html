@@ -506,6 +506,78 @@
 </head>
 <body>
 
+<!-- ===================== THEME C INTRO · BLUEPRINT / PRECISION ===================== -->
+<div id="sukari-intro" aria-hidden="true">
+  <div class="intro-grid"></div>
+  <div class="intro-stage">
+    <div class="intro-scan"></div>
+    <svg class="intro-phoenix" viewBox="0 0 200 215" aria-hidden="true">
+      <defs><linearGradient id="ph-c" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#B89247"/><stop offset="1" stop-color="#1F3024"/>
+      </linearGradient></defs>
+      <g fill="none" stroke="url(#ph-c)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path class="p pw-r" pathLength="100" d="M100,94 C131,80 159,76 184,52 C171,82 150,103 117,111"/>
+        <path class="p pw-l" pathLength="100" d="M100,94 C69,80 41,76 16,52 C29,82 50,103 83,111"/>
+        <path class="p pb"   pathLength="100" d="M100,160 C97,132 99,116 100,100 L100,74 C100,67 104,63 110,61"/>
+        <path class="p pc"   pathLength="100" d="M110,61 C115,55 118,50 121,44"/>
+        <path class="p pt-l" pathLength="100" d="M100,158 C92,174 86,186 79,199"/>
+        <path class="p pt-m" pathLength="100" d="M100,158 C100,176 100,188 100,201"/>
+        <path class="p pt-r" pathLength="100" d="M100,158 C108,174 114,186 121,199"/>
+      </g>
+      <g stroke="#C9583F" stroke-width="1" stroke-linecap="round">
+        <line class="tick" x1="100" y1="22" x2="100" y2="34"/>
+        <line class="tick" x1="184" y1="52" x2="194" y2="52"/>
+        <line class="tick" x1="16" y1="52" x2="6" y2="52"/>
+      </g>
+    </svg>
+    <div class="intro-fig">FIG.&nbsp;01 &mdash; PHOENIX</div>
+    <div class="intro-lockup">
+      <div class="intro-logo" role="img" aria-label="Sukari Spirits"></div>
+      <div class="intro-wm">Sukari<span>Spirits</span></div>
+    </div>
+  </div>
+</div>
+<style>
+  #sukari-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
+    background:radial-gradient(120% 90% at 50% 42%,#FBFCFA 0%,#F2F4EF 56%,#E5EAE0 100%);
+    animation:si-out .8s cubic-bezier(.6,0,.3,1) 2.85s forwards}
+  #sukari-intro .intro-grid{position:absolute;inset:0;pointer-events:none;opacity:0;
+    background-image:linear-gradient(#CDD5C8 1px,transparent 1px),linear-gradient(90deg,#CDD5C8 1px,transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask:radial-gradient(58% 48% at 50% 44%,#000,transparent 76%);mask:radial-gradient(58% 48% at 50% 44%,#000,transparent 76%);
+    animation:grid-in .8s ease .1s forwards}
+  #sukari-intro .intro-stage{position:relative;width:min(320px,74vw);height:360px;display:grid;place-items:center}
+  #sukari-intro .intro-phoenix{position:absolute;top:6px;width:150px;height:auto;
+    filter:drop-shadow(0 6px 12px rgba(31,48,36,.14));
+    animation:ph-out .5s ease 2.05s forwards}
+  #sukari-intro .p{stroke-dasharray:100;stroke-dashoffset:100;animation:ph-draw 1s ease forwards}
+  #sukari-intro .pw-r{animation-delay:.35s}#sukari-intro .pw-l{animation-delay:.45s}
+  #sukari-intro .pb{animation-delay:.65s}#sukari-intro .pc{animation-delay:.9s}
+  #sukari-intro .pt-l{animation-delay:.7s}#sukari-intro .pt-m{animation-delay:.78s}#sukari-intro .pt-r{animation-delay:.86s}
+  #sukari-intro .tick{stroke-dasharray:16;stroke-dashoffset:16;animation:ph-draw .5s ease 1.15s forwards}
+  #sukari-intro .intro-scan{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:172px;height:2px;opacity:0;
+    background:linear-gradient(90deg,transparent,#C9583F 50%,transparent);
+    box-shadow:0 0 10px rgba(201,88,63,.6);animation:scan 1.5s cubic-bezier(.4,0,.5,1) .3s forwards}
+  #sukari-intro .intro-fig{position:absolute;top:2px;left:6px;font-family:"Spline Sans Mono",ui-monospace,monospace;
+    font-size:10px;letter-spacing:.14em;color:#5C6A5E;opacity:0;animation:tag-in .5s ease 1.25s forwards}
+  #sukari-intro .intro-lockup{opacity:0;transform:scale(.96);display:flex;flex-direction:column;align-items:center;gap:8px;
+    animation:logo-in .9s cubic-bezier(.2,.7,.2,1) 1.95s forwards}
+  #sukari-intro .intro-logo{width:60px;height:194px;background:url(images/logo-dark-hires.png) center/contain no-repeat;
+    filter:drop-shadow(0 8px 14px rgba(31,48,36,.18))}
+  #sukari-intro .intro-wm{font-family:"Space Grotesk",system-ui,sans-serif;font-weight:500;color:#1F3024;font-size:2rem;line-height:1;letter-spacing:-.02em}
+  #sukari-intro .intro-wm span{display:block;font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:.56rem;
+    font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:#B89247;margin-top:10px}
+  @keyframes ph-draw{to{stroke-dashoffset:0}}
+  @keyframes grid-in{to{opacity:.55}}
+  @keyframes scan{0%{top:6px;opacity:0}12%{opacity:.9}88%{opacity:.9}100%{top:208px;opacity:0}}
+  @keyframes ph-out{to{opacity:0}}
+  @keyframes tag-in{to{opacity:.85}}
+  @keyframes logo-in{0%{opacity:0;transform:scale(.96)}100%{opacity:1;transform:scale(1)}}
+  @keyframes si-out{to{opacity:0;visibility:hidden}}
+  @media(prefers-reduced-motion:reduce){#sukari-intro *{animation-duration:.01s!important}#sukari-intro .intro-lockup{opacity:1;transform:none}}
+</style>
+<script>(function(){var ov=document.getElementById('sukari-intro');if(!ov)return;var k=function(){ov.style.display='none'};setTimeout(k,3800);ov.addEventListener('click',k);window.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key===' ')k()},{once:true})})();</script>
+
 <!-- ============ NAV ============ -->
 <nav>
   <div class="wrap nav-in">
