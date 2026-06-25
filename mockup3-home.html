@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sukari Spirits - Fruit and Vegetable Infused Vodka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* THEME C "TRANSPARENT" - locked palette */
+    --porcelain:#F2F4EF;      /* cool off-white, faint green-grey */
+    --porcelain-2:#E8ECE4;    /* slightly deeper panel */
+    --botanical:#1F3024;      /* deep green anchor */
+    --botanical-2:#26392C;
+    --coral:#E0735A;          /* the pop */
+    --coral-deep:#C9583F;
+    --gold:#B89247;           /* restrained antique gold */
+    --clay:#B5673F;           /* tertiary accent ONLY */
+    --ink:#1A241D;            /* near-black green-ink text */
+    --muted:#5C6A5E;          /* muted green-grey text */
+    --line:#CDD5C8;           /* hairline on porcelain */
+    --line-dark:#3A4D3F;      /* hairline on botanical */
+    --disp:'Space Grotesk',sans-serif;
+    --mono:'Spline Sans Mono',ui-monospace,monospace;
+    --body:'Hanken Grotesk',system-ui,sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--porcelain);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+
+  /* ---- shared mono label ---- */
+  .mono{font-family:var(--mono);font-weight:500}
+  .label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:500;
+  }
+  .label .dot{color:var(--coral)}
+
+  /* ============ NAV ============ */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,244,239,.86);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{
+    display:flex;align-items:center;justify-content:space-between;
+    height:74px;
+  }
+  .brand{display:flex;align-items:center;gap:13px}
+  .brand img{height:34px;width:auto}
+  .brand .nm{
+    font-family:var(--disp);font-weight:600;font-size:17px;
+    letter-spacing:.02em;color:var(--botanical);
+  }
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;
+    color:var(--muted);text-transform:uppercase;transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--botanical)}
+  .nav-shop{
+    font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;
+    border:1px solid var(--line);border-radius:2px;
+    padding:8px 16px;color:var(--botanical)!important;
+    transition:border-color .2s,background .2s;
+  }
+  .nav-shop:hover{border-color:var(--coral);background:#fff}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0;padding:6px}
+  .burger span{width:24px;height:2px;background:var(--botanical);display:block}
+
+  /* ============ HERO (full-viewport art-directed moment) ============ */
+  .hero{
+    position:relative;min-height:92vh;display:flex;flex-direction:column;
+    justify-content:center;overflow:hidden;padding:40px 0 0;
+    background:
+      radial-gradient(120% 90% at 72% 38%, #FBFCFA 0%, var(--porcelain) 46%, var(--porcelain-2) 100%);
+  }
+  /* faint lab graticule on the porcelain ground */
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(120% 80% at 70% 40%, #000 0%, transparent 72%);
+            mask-image:radial-gradient(120% 80% at 70% 40%, #000 0%, transparent 72%);
+    opacity:.5;
+  }
+  .hero-grid{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1.02fr .98fr;gap:24px;align-items:center;
+  }
+  .hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+  .hero-eyebrow .spec{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--coral-deep);font-weight:600;
+  }
+  .hero-eyebrow .rule{height:1px;flex:1;background:var(--line);max-width:88px}
+  .hero h1{
+    font-family:var(--disp);font-weight:500;
+    font-size:clamp(46px,7.8vw,104px);
+    line-height:.92;letter-spacing:-.03em;
+    color:var(--botanical);
+  }
+  .hero h1 em{font-style:normal;color:var(--coral-deep)}
+  .hero .sub{
+    margin-top:30px;font-size:18px;max-width:31em;color:var(--ink);
+    line-height:1.62;
+  }
+  .hero .sub b{font-weight:600}
+  .hero-cta{display:flex;align-items:center;gap:18px;margin-top:38px;flex-wrap:wrap}
+
+  /* the clean bottle, large + floating */
+  .hero-bottle{position:relative;display:flex;justify-content:center;align-items:center}
+  /* ruby glow lighting the liquid */
+  .hero-bottle::before{
+    content:"";position:absolute;z-index:0;
+    width:62%;aspect-ratio:1/1;left:50%;top:52%;transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(224,115,90,.30) 0%, rgba(224,115,90,.10) 38%, transparent 70%);
+    filter:blur(8px);
+  }
+  .hero-bottle img{
+    position:relative;z-index:2;
+    width:auto;height:clamp(440px,72vh,760px);max-width:100%;
+    filter:drop-shadow(0 40px 46px rgba(31,48,36,.34));
+    animation:floaty 7s ease-in-out infinite;
+  }
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  /* mono specimen calls floating beside the bottle */
+  .hero-bottle .pin{
+    position:absolute;z-index:3;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;line-height:1.35;
+    color:var(--botanical);
+    background:rgba(251,252,250,.92);border:1px solid var(--line);border-radius:2px;
+    padding:7px 11px;backdrop-filter:blur(4px);
+    box-shadow:0 10px 26px -18px rgba(31,48,36,.5);
+  }
+  .hero-bottle .pin .c{color:var(--coral-deep)}
+  .hero-bottle .pin::before{
+    content:"";position:absolute;width:8px;height:8px;border-radius:50%;
+    background:var(--coral);border:2px solid var(--porcelain);
+  }
+  .hero-bottle .pin.p1{top:13%;left:0}
+  .hero-bottle .pin.p1::before{right:-18px;top:50%;transform:translateY(-50%)}
+  .hero-bottle .pin.p2{bottom:21%;right:-4%;text-align:right}
+  .hero-bottle .pin.p2::before{left:-18px;top:50%;transform:translateY(-50%)}
+  .btn-primary{
+    font-family:var(--mono);font-size:13px;letter-spacing:.06em;
+    text-transform:uppercase;font-weight:500;
+    background:var(--botanical);color:var(--porcelain);
+    padding:15px 28px;border-radius:2px;
+    display:inline-flex;align-items:center;gap:10px;
+    transition:background .22s,transform .22s;
+  }
+  .btn-primary:hover{background:var(--botanical-2);transform:translateY(-1px)}
+  .btn-primary .arr{color:var(--coral)}
+  .btn-ghost{
+    font-family:var(--mono);font-size:13px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);
+    padding:15px 6px;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;
+  }
+  .btn-ghost:hover{color:var(--botanical);border-color:var(--coral)}
+
+  /* ABV / proof strip under hero */
+  .specbar{
+    position:relative;z-index:2;
+    margin-top:54px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .specbar-in{
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .specbar .cell{
+    padding:26px 8px;border-right:1px solid var(--line);
+  }
+  .specbar .cell:last-child{border-right:0}
+  .specbar .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .specbar .v{font-family:var(--disp);font-weight:500;font-size:30px;color:var(--botanical);margin-top:8px;line-height:1}
+  .specbar .v small{font-size:14px;color:var(--coral-deep);font-weight:600;font-family:var(--mono)}
+
+  /* ============ SECTION SCAFFOLD ============ */
+  section{padding:108px 0}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:54px}
+  .sec-head .ix{font-family:var(--mono);font-size:12px;color:var(--coral-deep);letter-spacing:.1em;white-space:nowrap}
+  .sec-head h2{
+    font-family:var(--disp);font-weight:500;
+    font-size:clamp(28px,3.6vw,44px);line-height:1.04;letter-spacing:-.018em;
+    color:var(--botanical);max-width:13em;
+  }
+  .sec-head p{font-size:16px;color:var(--muted);max-width:24em;flex:0 0 auto}
+
+  /* ============ SPECIMEN GRID (signature) ============ */
+  .specimens{background:var(--porcelain-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .spec-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+    border:1px solid var(--line);background:var(--porcelain);
+  }
+  .specimen{
+    padding:30px 24px 28px;border-right:1px solid var(--line);
+    position:relative;transition:background .25s;
+  }
+  .specimen:last-child{border-right:0}
+  .specimen:hover{background:#fff}
+  .specimen .no{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em}
+  .swatch{
+    width:46px;height:46px;border-radius:50%;margin:20px 0 22px;
+    border:1px solid rgba(0,0,0,.06);
+    box-shadow:inset 0 -6px 14px -8px rgba(0,0,0,.25);
+  }
+  .specimen h3{font-family:var(--disp);font-weight:500;font-size:21px;color:var(--botanical);letter-spacing:-.01em}
+  .specimen .role{
+    font-family:var(--mono);font-size:11.5px;line-height:1.55;color:var(--muted);
+    margin-top:12px;border-top:1px solid var(--line);padding-top:12px;
+  }
+  .specimen .role .lbl{color:var(--coral-deep)}
+  .spec-note{
+    margin-top:26px;font-family:var(--mono);font-size:12.5px;color:var(--muted);
+    font-style:italic;display:flex;gap:10px;align-items:flex-start;
+  }
+  .spec-note .bar{flex:0 0 2px;width:2px;align-self:stretch;background:var(--coral);min-height:34px}
+  .spec-note cite{font-style:normal;color:var(--botanical);font-weight:500}
+
+  /* ============ NOT-IN-IT CHECKLIST ============ */
+  .transparency{position:relative}
+  .trans-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .checklist{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
+  .ck{
+    display:flex;align-items:center;gap:13px;
+    padding:17px 20px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);
+    font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--botanical);
+  }
+  .ck:nth-child(2n){border-right:0}
+  .ck.out .mk{color:var(--coral-deep)}
+  .ck.in .mk{color:var(--gold)}
+  .ck .mk{font-weight:600;font-size:14px;width:16px;flex:0 0 16px;text-align:center}
+  .ck .x{font-size:11px;color:var(--muted);margin-left:auto;letter-spacing:.1em;text-transform:uppercase}
+  .trans-copy h2{
+    font-family:var(--disp);font-weight:500;font-size:clamp(28px,3.4vw,40px);
+    line-height:1.05;letter-spacing:-.018em;color:var(--botanical);margin-top:18px;
+  }
+  .trans-copy p{margin-top:22px;font-size:16.5px;color:var(--ink);max-width:30em}
+  .trans-copy p+p{margin-top:16px;color:var(--muted)}
+  .trans-aside{
+    margin-top:30px;padding:18px 22px;background:var(--porcelain-2);
+    border-left:2px solid var(--coral);border-radius:0 3px 3px 0;
+  }
+  .trans-aside .q{font-size:16px;font-style:italic;color:var(--botanical);line-height:1.5}
+  .trans-aside cite{display:block;margin-top:8px;font-family:var(--mono);font-size:11.5px;color:var(--muted);font-style:normal;letter-spacing:.04em}
+
+  /* ============ TASTE / STRAIGHT ============ */
+  .taste{background:var(--botanical);color:var(--porcelain)}
+  .taste .label{color:#9CB0A0}
+  .taste-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .taste h2{
+    font-family:var(--disp);font-weight:500;font-size:clamp(30px,4vw,52px);
+    line-height:1.02;letter-spacing:-.02em;color:var(--porcelain);
+  }
+  .taste h2 em{font-style:normal;color:var(--coral)}
+  .taste .lead{margin-top:26px;font-size:17px;color:#C9D4C8;max-width:30em;line-height:1.62}
+  .taste-stats{margin-top:40px;border-top:1px solid var(--line-dark)}
+  .taste-stat{
+    display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:baseline;
+    padding:18px 0;border-bottom:1px solid var(--line-dark);
+  }
+  .taste-stat .n{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.06em}
+  .taste-stat .t{font-size:15.5px;color:#DDE5DC}
+  .taste-stat .t b{color:#fff;font-weight:600}
+  .taste-fig{position:relative}
+  .taste-fig .ph{
+    border:1px solid var(--line-dark);border-radius:4px;overflow:hidden;
+  }
+  .taste-fig .ph img{width:100%;aspect-ratio:4/5;object-fit:cover}
+  .taste-fig figcaption{
+    margin-top:14px;font-family:var(--mono);font-size:11px;color:#9CB0A0;
+    display:flex;justify-content:space-between;letter-spacing:.04em;
+  }
+
+  /* ============ FULL-BLEED FEATURE BAND ============ */
+  .feature{
+    position:relative;min-height:560px;display:flex;align-items:flex-end;
+    background:var(--botanical);overflow:hidden;
+  }
+  .feature img.bg{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  }
+  .feature::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg, rgba(20,30,24,.82) 0%, rgba(20,30,24,.46) 46%, rgba(20,30,24,.12) 100%);
+  }
+  .feature .wrap{position:relative;z-index:2;width:100%;padding-top:72px;padding-bottom:64px}
+  .feature .fcap{max-width:34em}
+  .feature .label{color:#A7C2AD}
+  .feature h2{
+    font-family:var(--disp);font-weight:500;font-size:clamp(28px,3.8vw,48px);
+    line-height:1.05;letter-spacing:-.02em;color:var(--porcelain);margin-top:16px;
+  }
+  .feature h2 em{font-style:normal;color:var(--coral)}
+  .feature p{margin-top:20px;font-size:16.5px;color:#D7E0D6;max-width:30em;line-height:1.6}
+  .feature .fnote{
+    margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+    color:#A7C2AD;font-style:italic;text-wrap:balance;
+  }
+  .feature .fnote cite{font-style:normal;color:#fff}
+
+  /* ============ COCKTAILS ============ */
+  .cocktails .sec-head h2 em{font-style:normal;color:var(--coral-deep)}
+  .ck-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .ck-card{
+    border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#fff;
+    transition:transform .28s,box-shadow .28s;
+  }
+  .ck-card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px rgba(31,48,36,.5)}
+  .ck-card .im{aspect-ratio:1/1;overflow:hidden}
+  .ck-card .im img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .ck-card:hover .im img{transform:scale(1.05)}
+  .ck-card .meta{padding:18px 18px 20px}
+  .ck-card .meta .no{font-family:var(--mono);font-size:10.5px;color:var(--coral-deep);letter-spacing:.1em}
+  .ck-card .meta h3{font-family:var(--disp);font-weight:500;font-size:19px;color:var(--botanical);margin-top:8px;letter-spacing:-.01em}
+  .ck-card .meta .build{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.5;border-top:1px solid var(--line);padding-top:10px}
+
+  /* ============ AWARDS WALL (4 real medals) ============ */
+  .awards{background:var(--porcelain-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .aw-wall{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid var(--line);background:var(--porcelain);
+  }
+  .aw-cell{
+    padding:40px 26px 34px;border-right:1px solid var(--line);
+    text-align:center;transition:background .25s;
+  }
+  .aw-cell:last-child{border-right:0}
+  .aw-cell:hover{background:#fff}
+  .aw-medal{
+    width:148px;height:148px;margin:0 auto 22px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 42%, #fff 0%, #FBFCFA 55%, var(--porcelain-2) 100%);
+    box-shadow:inset 0 0 0 1px var(--line), inset 0 -10px 22px -16px rgba(31,48,36,.3);
+    transition:transform .3s;
+  }
+  .aw-cell:hover .aw-medal{transform:translateY(-4px)}
+  .aw-cell img{
+    height:120px;width:auto;display:block;
+    filter:drop-shadow(0 12px 20px rgba(31,48,36,.28));
+  }
+  .aw-cell .yr{font-family:var(--mono);font-size:12px;color:var(--coral-deep);letter-spacing:.1em}
+  .aw-cell .rk{font-family:var(--disp);font-weight:500;font-size:20px;color:var(--botanical);margin-top:10px;letter-spacing:-.01em}
+  .aw-cell .comp{
+    font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--muted);
+    letter-spacing:.02em;margin-top:10px;border-top:1px solid var(--line);
+    padding-top:12px;text-transform:none;
+  }
+  .aw-foot{
+    margin-top:30px;display:flex;align-items:center;gap:14px;
+    font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.03em;
+  }
+  .aw-foot .bar{width:2px;height:18px;background:var(--coral);flex:0 0 2px}
+
+  /* ============ FOUNDER ============ */
+  .founder-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:60px;align-items:center}
+  .founder-copy h2{
+    font-family:var(--disp);font-weight:500;font-size:clamp(26px,3.2vw,38px);
+    line-height:1.06;letter-spacing:-.018em;color:var(--botanical);
+  }
+  .founder-copy .who{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:18px}
+  .founder-copy p{margin-top:20px;font-size:16.5px;color:var(--ink);max-width:34em}
+  .founder-copy p+p{color:var(--muted)}
+  .founder-pull{
+    margin-top:28px;padding-left:20px;border-left:2px solid var(--gold);
+  }
+  .founder-pull .q{font-size:18px;font-style:italic;color:var(--botanical);line-height:1.5;max-width:24em}
+  .founder-pull cite{display:block;margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);font-style:normal;letter-spacing:.04em}
+  .founder-meaning{
+    background:var(--botanical);color:var(--porcelain);border-radius:5px;
+    padding:42px 38px;position:relative;overflow:hidden;
+  }
+  .founder-meaning .word{font-family:var(--disp);font-weight:500;font-size:clamp(46px,7vw,84px);color:var(--coral);letter-spacing:-.02em;line-height:1}
+  .founder-meaning .ipa{font-family:var(--mono);font-size:13px;color:#9CB0A0;margin-top:10px;letter-spacing:.06em}
+  .founder-meaning .def{margin-top:24px;border-top:1px solid var(--line-dark);padding-top:22px}
+  .founder-meaning .def .pos{font-family:var(--mono);font-size:11.5px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+  .founder-meaning .def p{margin-top:10px;font-size:16px;color:#DDE5DC;line-height:1.55}
+
+  /* ============ BUY / FIND ============ */
+  .buy{background:var(--botanical-2);color:var(--porcelain);text-align:center}
+  .buy-in{max-width:760px;margin:0 auto}
+  .buy .label{color:#9CB0A0}
+  .buy h2{
+    font-family:var(--disp);font-weight:500;font-size:clamp(30px,4.4vw,56px);
+    line-height:1.02;letter-spacing:-.02em;color:var(--porcelain);margin-top:18px;
+  }
+  .buy h2 em{font-style:normal;color:var(--coral)}
+  .buy p{margin-top:22px;font-size:16.5px;color:#C9D4C8;max-width:34em;margin-left:auto;margin-right:auto}
+  .buy-cta{display:flex;gap:16px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .buy .btn-primary{background:var(--coral);color:#2A1410}
+  .buy .btn-primary:hover{background:var(--coral-deep);color:var(--porcelain)}
+  .buy .btn-primary .arr{color:#2A1410}
+  .buy .btn-line{
+    font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--porcelain);border:1px solid var(--line-dark);border-radius:2px;
+    padding:15px 28px;transition:border-color .22s,background .22s;
+  }
+  .buy .btn-line:hover{border-color:var(--coral);background:rgba(255,255,255,.04)}
+  .buy-find{
+    margin-top:40px;padding-top:26px;border-top:1px solid var(--line-dark);
+    font-family:var(--mono);font-size:12.5px;color:#9CB0A0;letter-spacing:.03em;
+  }
+  .buy-find b{color:var(--porcelain);font-weight:500}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--botanical);color:#A9BBAD;padding:64px 0 36px}
+  .ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;align-items:start}
+  .ft-brand img{height:40px;margin-bottom:20px}
+  .ft-brand p{font-size:14px;color:#9CB0A0;max-width:26em;line-height:1.6}
+  .ft-col h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .ft-col a{display:block;font-size:14px;color:#C9D4C8;margin-bottom:11px;transition:color .2s}
+  .ft-col a:hover{color:#fff}
+  .ft-bottom{
+    margin-top:52px;padding-top:26px;border-top:1px solid var(--line-dark);
+    display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+  }
+  .ft-bottom .legal{font-family:var(--mono);font-size:11px;color:#7E9384;letter-spacing:.03em}
+  .ft-21{
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#C9D4C8;
+    border:1px solid var(--line-dark);border-radius:2px;padding:8px 14px;
+  }
+  .ft-21 b{color:var(--coral)}
+
+  /* ---- reveal ---- */
+  .rev{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .rev.show{opacity:1;transform:none}
+
+  /* respect reduced-motion: no reveal, no movement, no smooth scroll */
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rev{opacity:1;transform:none;transition:none}
+    *,*::before,*::after{
+      animation-duration:.001ms!important;animation-iteration-count:1!important;
+      transition-duration:.001ms!important;scroll-behavior:auto!important;
+    }
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media(max-width:980px){
+    .hero{min-height:auto;padding:48px 0 0}
+    .hero-grid,.trans-grid,.taste-grid,.founder-grid{grid-template-columns:1fr;gap:44px}
+    .hero-grid{text-align:center}
+    .hero-eyebrow{justify-content:center}
+    .hero-eyebrow .rule{display:none}
+    .hero .sub{margin-left:auto;margin-right:auto}
+    .hero-cta{justify-content:center}
+    .hero-bottle{order:-1}
+    .hero-bottle img{height:clamp(380px,58vh,560px)}
+    .hero-bottle .pin{display:none}
+    .ck-grid{grid-template-columns:1fr 1fr}
+    .spec-grid{grid-template-columns:1fr 1fr 1fr}
+    .specimen:nth-child(3){border-right:0}
+    .aw-wall{grid-template-columns:1fr 1fr}
+    .aw-cell:nth-child(2){border-right:0}
+    .aw-cell:nth-child(1),.aw-cell:nth-child(2){border-bottom:1px solid var(--line)}
+    .ft-top{grid-template-columns:1fr 1fr}
+    .ft-brand{grid-column:1/-1}
+  }
+  @media(max-width:680px){
+    .wrap{padding:0 22px}
+    .nav-links{display:none}
+    .burger{display:flex}
+    section{padding:74px 0}
+    .sec-head{flex-direction:column;gap:14px;margin-bottom:36px}
+    .specbar-in{grid-template-columns:1fr 1fr}
+    .specbar .cell:nth-child(2){border-right:0}
+    .specbar .cell{border-bottom:1px solid var(--line)}
+    .spec-grid{grid-template-columns:1fr 1fr}
+    .specimen{border-right:1px solid var(--line)!important}
+    .specimen:nth-child(2n){border-right:0!important}
+    .checklist{grid-template-columns:1fr}
+    .ck{border-right:0}
+    .ck-grid{grid-template-columns:1fr 1fr}
+    .founder-meaning{padding:32px 26px}
+    .feature .wrap{padding-top:56px;padding-bottom:48px}
+    .feature{min-height:480px}
+  }
+  @media(max-width:440px){
+    .ck-grid{grid-template-columns:1fr}
+    .aw-cell{padding:32px 20px 28px}
+  }
+</style>
+</head>
+<body>
+
+
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <img src="images/logo-gold.png" alt="Sukari Spirits">
+      <span class="nm">Sukari Spirits</span>
+    </a>
+    <div class="nav-links">
+      <a href="#whats-in">What's in it</a>
+      <a href="#taste">The taste</a>
+      <a href="#cocktails">Cocktails</a>
+      <a href="#story">Story</a>
+      <a class="nav-shop" href="#buy">Shop</a>
+    </div>
+    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="hero-eyebrow">
+          <span class="spec">Fruit &amp; vegetable infused vodka</span>
+          <span class="rule"></span>
+        </div>
+        <h1>See what's<br><em>inside.</em></h1>
+        <p class="sub">Real blood orange, dragonfruit, pineapple and pear, infused into vodka. Beets give it the rosy color you can see through the glass. <b>No sugar. No preservatives. Nothing artificial.</b></p>
+        <div class="hero-cta">
+          <a class="btn-primary" href="#whats-in">Read the label <span class="arr">&rarr;</span></a>
+          <a class="btn-ghost" href="#buy">Where to find it</a>
+        </div>
+      </div>
+
+      <div class="hero-bottle">
+        <span class="pin p1">WHAT'S&nbsp;INSIDE<br><span class="c">ruby, visible</span></span>
+        <span class="pin p2">750ml &amp; 375ml<br><span class="c">25% ABV &middot; 50 proof</span></span>
+        <img src="images/bottle-clean.png" alt="The Sukari ultra-premium vodka bottle, garnet liquid visible through frosted glass with the gold phoenix wordmark">
+      </div>
+    </div>
+
+    <!-- ABV / honest spec bar -->
+    <div class="specbar">
+      <div class="specbar-in">
+        <div class="cell">
+          <div class="k">Alcohol</div>
+          <div class="v">25%<small> ABV</small></div>
+        </div>
+        <div class="cell">
+          <div class="k">Added sugar</div>
+          <div class="v">0<small> grams</small></div>
+        </div>
+        <div class="cell">
+          <div class="k">Real fruit</div>
+          <div class="v">4<small> infused</small></div>
+        </div>
+        <div class="cell">
+          <div class="k">Color from</div>
+          <div class="v">Beet<small> only</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ SPECIMENS (signature) ============ -->
+<section class="specimens rev" id="whats-in">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ix">01 / WHAT'S IN IT</span>
+      <h2>Five fruits and vegetables go in.</h2>
+      <p>Each is a real fruit or vegetable, infused in. No flavorings, no concentrate, no extract.</p>
+    </div>
+
+    <div class="spec-grid">
+      <div class="specimen">
+        <span class="no">NO&middot;01</span>
+        <div class="swatch" style="background:radial-gradient(circle at 35% 30%, #E8523C, #9C2E1E)"></div>
+        <h3>Blood Orange</h3>
+        <div class="role"><span class="lbl">role /</span> citrus top note, the first thing you taste</div>
+      </div>
+      <div class="specimen">
+        <span class="no">NO&middot;02</span>
+        <div class="swatch" style="background:radial-gradient(circle at 35% 30%, #E86A9E, #B53E6E)"></div>
+        <h3>Dragonfruit</h3>
+        <div class="role"><span class="lbl">role /</span> soft, mellow body; rounds the sharp edges</div>
+      </div>
+      <div class="specimen">
+        <span class="no">NO&middot;03</span>
+        <div class="swatch" style="background:radial-gradient(circle at 35% 30%, #E7B948, #C2882B)"></div>
+        <h3>Pineapple</h3>
+        <div class="role"><span class="lbl">role /</span> the natural sweetness, no sugar required</div>
+      </div>
+      <div class="specimen">
+        <span class="no">NO&middot;04</span>
+        <div class="swatch" style="background:radial-gradient(circle at 35% 30%, #D9E2B0, #A9B873)"></div>
+        <h3>Pear</h3>
+        <div class="role"><span class="lbl">role /</span> clean finish; keeps it light, not syrupy</div>
+      </div>
+      <div class="specimen">
+        <span class="no">NO&middot;05</span>
+        <div class="swatch" style="background:radial-gradient(circle at 35% 30%, #C8506A, #7E2B41)"></div>
+        <h3>Beet</h3>
+        <div class="role"><span class="lbl">role /</span> the rosy coral color, all of it natural</div>
+      </div>
+    </div>
+
+    <!-- subtle quote 1 -->
+    <p class="spec-note">
+      <span class="bar"></span>
+      <span>&ldquo;What you see in it is the fruits and vegetables.&rdquo;&nbsp; <cite>Rolesha Brown, founder</cite></span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ TRANSPARENCY CHECKLIST ============ -->
+<section class="transparency rev" id="not-in">
+  <div class="wrap">
+    <div class="trans-grid">
+      <div class="trans-copy">
+        <span class="label"><span class="dot">&bull;</span>&nbsp; 02 / WHAT'S NOT IN IT</span>
+        <h2>The honest part is the short part.</h2>
+        <p>Most flavored vodkas lean on added sugar and lab-made flavoring. Sukari doesn't. The flavor comes from the fruit, the color comes from the beet, and the list of what we leave out is as plain as the list of what we put in.</p>
+        <p>It also reads clean across the board: vegan, gluten-free, GMO-free, and Kosher certified. The label is the whole story.</p>
+      </div>
+
+      <div class="checklist">
+        <div class="ck out"><span class="mk">&times;</span> Added sugar <span class="x">none</span></div>
+        <div class="ck out"><span class="mk">&times;</span> Preservatives <span class="x">none</span></div>
+        <div class="ck out"><span class="mk">&times;</span> Artificial flavor <span class="x">none</span></div>
+        <div class="ck out"><span class="mk">&times;</span> Artificial color <span class="x">none</span></div>
+        <div class="ck in"><span class="mk">&check;</span> Vegan <span class="x">yes</span></div>
+        <div class="ck in"><span class="mk">&check;</span> Gluten-free <span class="x">yes</span></div>
+        <div class="ck in"><span class="mk">&check;</span> GMO-free <span class="x">yes</span></div>
+        <div class="ck in"><span class="mk">&check;</span> Kosher <span class="x">certified</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TASTE / STRAIGHT ============ -->
+<section class="taste rev" id="taste">
+  <div class="wrap">
+    <div class="taste-grid">
+      <div>
+        <span class="label">03 / THE TASTE</span>
+        <h2 style="margin-top:18px">Straight, it tastes like<br><em>fruit.</em> It's still vodka.</h2>
+        <p class="lead">No burn going down, and people tell us no hangover after. That's the part that surprises first-timers: it drinks easy on its own, but it's a true 50-proof spirit.</p>
+        <div class="taste-stats">
+          <div class="taste-stat">
+            <span class="n">/01</span>
+            <span class="t"><b>No burn.</b> The infusion smooths the heat most vodkas hit you with.</span>
+          </div>
+          <div class="taste-stat">
+            <span class="n">/02</span>
+            <span class="t"><b>Drink it neat.</b> Chilled, over ice, no mixer needed.</span>
+          </div>
+          <div class="taste-stat">
+            <span class="n">/03</span>
+            <span class="t"><b>&ldquo;Sukari&rdquo; means sugar</b> in Swahili and Arabic, for how sweet it reads with none added.</span>
+          </div>
+        </div>
+      </div>
+
+      <figure class="taste-fig">
+        <div class="ph"><img src="images/cocktail-8.jpg" alt="Sukari served neat over ice with blood orange"></div>
+        <figcaption>
+          <span>SERVED &middot; neat over ice</span>
+          <span>color: natural coral</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COCKTAILS ============ -->
+<section class="cocktails rev" id="cocktails">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ix">04 / MIXED</span>
+      <h2>Six ways the bar <em>pours it.</em></h2>
+      <p>It's good neat, and just as good in a glass. The coral color carries, so you don't need much else.</p>
+    </div>
+    <div class="ck-grid">
+      <article class="ck-card">
+        <div class="im"><img src="images/cocktail-1.jpg" alt="Tropical Bay Breeze"></div>
+        <div class="meta">
+          <span class="no">CKT&middot;01</span>
+          <h3>Tropical Bay Breeze</h3>
+          <div class="build">3 oz Sukari &middot; 2 oz pineapple &middot; 1 oz cranberry &middot; squeeze of lime &middot; orange wheel</div>
+        </div>
+      </article>
+      <article class="ck-card">
+        <div class="im"><img src="images/cocktail-2.jpg" alt="Sukari Moscow Mule"></div>
+        <div class="meta">
+          <span class="no">CKT&middot;02</span>
+          <h3>Sukari Mule</h3>
+          <div class="build">3 oz Sukari &middot; 4 oz ginger beer &middot; squeeze of lime &middot; over ice</div>
+        </div>
+      </article>
+      <article class="ck-card">
+        <div class="im"><img src="images/cocktail-3.jpg" alt="Sukari Gimlet"></div>
+        <div class="meta">
+          <span class="no">CKT&middot;03</span>
+          <h3>Coral Gimlet</h3>
+          <div class="build">3 oz Sukari &middot; squeeze of fresh lime &middot; orange wedge</div>
+        </div>
+      </article>
+      <article class="ck-card">
+        <div class="im"><img src="images/cocktail-5.jpg" alt="Sukari highball with citrus"></div>
+        <div class="meta">
+          <span class="no">CKT&middot;04</span>
+          <h3>Garden Highball</h3>
+          <div class="build">3 oz Sukari &middot; 1 oz soda &middot; cucumber slice &middot; squeeze of lime</div>
+        </div>
+      </article>
+      <article class="ck-card">
+        <div class="im"><img src="images/cocktail-6.jpg" alt="Sukari spritz over ice"></div>
+        <div class="meta">
+          <span class="no">CKT&middot;05</span>
+          <h3>Blood Orange Spritz</h3>
+          <div class="build">3 oz Sukari &middot; 2 oz sparkling &middot; 1 oz blood orange &middot; orange twist</div>
+        </div>
+      </article>
+      <article class="ck-card">
+        <div class="im"><img src="images/cocktail-7.jpg" alt="Sukari served neat over ice"></div>
+        <div class="meta">
+          <span class="no">CKT&middot;06</span>
+          <h3>On the Rocks</h3>
+          <div class="build">3 oz Sukari &middot; over ice</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FULL-BLEED FEATURE BAND ============ -->
+<section class="feature" id="bar">
+  <img class="bg" src="images/sukari-people-patio.webp" alt="A couple enjoying Sukari cocktails at a sunny patio brunch, the Sukari bottle on the table">
+  <div class="wrap">
+    <div class="fcap rev">
+      <span class="label"><span class="dot">&bull;</span>&nbsp; On the bar</span>
+      <h2>Drink it straight, or let a bartender <em>build on it.</em></h2>
+      <p>Because the fruit's already infused in, it holds up neat and gives a bartender a clean base to build on. That coral color carries from the bottle right into the glass.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AWARDS WALL (4 real medals) ============ -->
+<section class="awards rev" id="awards">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ix">05 / AWARDS</span>
+      <h2>Judged on the liquid, not the pitch.</h2>
+      <p>Four awards from independent spirits competitions, every one judged on taste.</p>
+    </div>
+    <div class="aw-wall">
+      <div class="aw-cell">
+        <div class="aw-medal"><img src="images/medal-gold18.png" alt="SIP Awards 2018 Double Gold medal"></div>
+        <div class="yr">2018</div>
+        <div class="rk">Double Gold</div>
+        <div class="comp">SIP Awards<br>International Spirits</div>
+      </div>
+      <div class="aw-cell">
+        <div class="aw-medal"><img src="images/medal-gold19.png" alt="SIP Awards 2019 Gold medal"></div>
+        <div class="yr">2019</div>
+        <div class="rk">Gold</div>
+        <div class="comp">SIP Awards<br>International Spirits</div>
+      </div>
+      <div class="aw-cell">
+        <div class="aw-medal"><img src="images/medal-bronze.png" alt="San Francisco World Spirits Competition 2022 Bronze medal"></div>
+        <div class="yr">2022</div>
+        <div class="rk">Bronze</div>
+        <div class="comp">San Francisco<br>World Spirits Competition</div>
+      </div>
+      <div class="aw-cell">
+        <div class="aw-medal"><img src="images/medal-silver.png" alt="Bartender Spirits Awards 2022 Silver medal"></div>
+        <div class="yr">2022</div>
+        <div class="rk">Silver</div>
+        <div class="comp">Bartender Spirits<br>Awards</div>
+      </div>
+    </div>
+    <div class="aw-foot">
+      <span class="bar"></span>
+      <span>Also recognized for the bottle design at the San Diego Spirits Festival.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOUNDER / STORY ============ -->
+<section class="founder rev" id="story">
+  <div class="wrap">
+    <div class="founder-grid">
+      <div class="founder-copy">
+        <div class="who">The founder</div>
+        <h2>Built by Rolesha Brown, from nothing, on her word.</h2>
+        <p>Sukari was created by Rolesha &ldquo;Ro&rdquo; Brown, a service-disabled veteran and single mother who taught herself the spirit business and made the first fruit-and-vegetable infused vodka in the category.</p>
+        <p>The bottle is hers too. The curve and the cutout are drawn from a woman's silhouette, and the phoenix forming the S stands for starting over.</p>
+        <div class="founder-pull">
+          <span class="q">&ldquo;If I don't have anything, I have my word.&rdquo;</span>
+          <cite>Rolesha Brown, founder</cite>
+        </div>
+      </div>
+
+      <aside class="founder-meaning">
+        <div class="word">Sukari</div>
+        <div class="ipa">/soo&middot;KAH&middot;ree/ &middot; Swahili &amp; Arabic</div>
+        <div class="def">
+          <div class="pos">noun</div>
+          <p>Sugar. The name is a play on the taste: it reads as sweet as the word suggests, with zero sugar added.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUY / FIND ============ -->
+<section class="buy rev" id="buy">
+  <div class="wrap buy-in">
+    <span class="label">06 / GET A BOTTLE</span>
+    <h2>Taste it <em>straight</em> first.</h2>
+    <p>Available in the 750ml bottle and the 375ml flask. Order direct, or find it at a shop or bar near you.</p>
+    <div class="buy-cta">
+      <a class="btn-primary" href="#">Shop the bottle <span class="arr">&rarr;</span></a>
+      <a class="btn-line" href="#">Find it near you</a>
+    </div>
+    <div class="buy-find">
+      Stocked at select retailers and bars. <b>Ask your local shop for Sukari</b>, or reach out and we'll point you to the nearest one.
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<style>
+  footer .foot-social{display:flex;gap:12px;margin-top:20px}
+  footer .foot-social a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid rgba(205,213,200,.28);color:rgba(242,244,239,.72);transition:.25s}
+  footer .foot-social a:hover{border-color:var(--coral);color:var(--coral);background:rgba(224,115,90,.12)}
+  footer .foot-social svg{width:18px;height:18px}
+</style>
+<footer>
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img src="images/logo-white.png" alt="Sukari Spirits">
+        <p>Fruit-and-vegetable infused premium vodka. Real fruit in, nothing artificial. The first of its kind.</p>
+        <div class="foot-social">
+          <a href="https://www.instagram.com/sukarispirits" target="_blank" rel="noopener" aria-label="Sukari Spirits on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.facebook.com/sukarispirits" target="_blank" rel="noopener" aria-label="Sukari Spirits on Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
+          <a href="https://twitter.com/sukarispirits" target="_blank" rel="noopener" aria-label="Sukari Spirits on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.53 8.6L23 22h-6.8l-5.3-6.93L4.8 22H1.66l8.05-9.2L1 2h6.96l4.79 6.34L18.9 2zm-1.19 18h1.9L7.06 4H5.03l12.68 16z"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Explore</h4>
+        <a href="#whats-in">What's in it</a>
+        <a href="#not-in">What's not</a>
+        <a href="#taste">The taste</a>
+        <a href="#cocktails">Cocktails</a>
+      </div>
+      <div class="ft-col">
+        <h4>More</h4>
+        <a href="#story">Founder's story</a>
+        <a href="#awards">Awards</a>
+        <a href="#buy">Shop</a>
+        <a href="#buy">Find it near you</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span class="legal">&copy; Sukari Spirits &middot; 25% ABV &middot; 50 proof &middot; Vegan &middot; Gluten-free &middot; GMO-free &middot; Kosher</span>
+      <span class="ft-21"><b>21+</b> &middot; Please drink responsibly</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // quiet scroll-reveal
+  (function(){
+    var els=document.querySelectorAll('.rev');
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('show')});return;}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target);}
+      });
+    },{threshold:.12});
+    els.forEach(function(e){io.observe(e);});
+  })();
+</script>
+</body>
+</html>
